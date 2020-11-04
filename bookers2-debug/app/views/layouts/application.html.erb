@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2-debug</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/4d0aeef251.js" crossorigin="anonymous"></script>
+
+  </head>
+
+
+  <body>
+    <%= render 'layouts/header' %><br><br><br>
+
+    <div class="container">
+      <div class="row">
+          <div class="col-xs-9 search_form">
+            <% if user_signed_in? %>
+              <%= form_with url:search_path,method: :get, local: true do |f| %>
+                <%= f.text_field :search_word %>
+                <%= f.select :range, [["User", "1"],["Book", "2"]]%>
+                <%= f.select :search_method, [["完全一致","perfect_match"],["前方一致","forward_match"],["後方一致","backward_match"],["部分一致","partial_match"]] %>
+                <%= f.submit "検索" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+     
+      
+      <p id="notice"><%= notice %></p>
+      <%= yield %>
+    </div>
+
+    <%= render 'layouts/footer' %>
+  </body>
+</html>
